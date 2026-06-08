@@ -1,19 +1,84 @@
-data/raw/
-data/processed/
+# ==========================
+# Data
+# ==========================
 
-checkpoints/
-*.pt
-*.pth
+data_raw
+data_processed
+checkpoints
+data/
+data_raw/
+data_processed/
 
 *.fits
 *.fits.gz
+*.fit
+
+# ==========================
+# Checkpoints
+# ==========================
+
+checkpoints/
+
+*.pt
+*.pth
+*.ckpt
+
+# ==========================
+# Python
+# ==========================
 
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+.pytest_cache/
+
+# ==========================
+# Jupyter
+# ==========================
 
 .ipynb_checkpoints/
 
+# ==========================
+# VS Code
+# ==========================
+
 .vscode/
 
+# ==========================
+# Environment
+# ==========================
+
 .env
+.env.*
+
 venv/
+.venv/
+
+# ==========================
+# OS
+# ==========================
+
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Logs
+# ==========================
+
+logs/
+*.log
+
+# ==========================
+# Build Artifacts
+# ==========================
+
+dist/
+build/
+
+# ==========================
+# Docker
+# ==========================
+
+docker-compose.override.yml

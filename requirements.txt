@@ -1,20 +1,18 @@
-torch
-torchvision
-timm
-
 numpy
 scipy
 pandas
+
+matplotlib
+tqdm
 
 astropy
 astroquery
 reproject
 
-matplotlib
-tqdm
-
-pyyaml
-einops
-
 jupyter
 notebook
+
+einops
+pyyaml
+
+timm
