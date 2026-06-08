@@ -1,0 +1,17 @@
+.git
+.github
+
+data_raw
+data_processed
+checkpoints
+
+notebooks
+
+__pycache__
+*.pyc
+
+.vscode
+
+.env
+venv
+.venv
