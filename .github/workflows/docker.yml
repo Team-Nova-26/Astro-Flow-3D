@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: docker/Dockerfile
+          file: docker/Dockerfile.ci
           push: ${{ github.event_name != 'pull_request' }}
           tags: |
             ghcr.io/${{ steps.owner.outputs.owner }}/astro-flow-3d:latest
