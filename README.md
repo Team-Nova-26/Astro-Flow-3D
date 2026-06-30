@@ -2,93 +2,130 @@
 
 Astro-Flow-3D is a physics-aware deep learning framework for analyzing and reconstructing galaxy morphology from James Webb Space Telescope (JWST) deep-field observations.
 
-The project focuses on building an end-to-end pipeline that transforms calibrated JWST observations into machine-learning-ready datasets for galaxy detection, segmentation, classification, and future 3D morpho-spectral reconstruction.
+The project aims to build a complete end-to-end pipeline that transforms calibrated JWST observations into machine-learning-ready datasets for galaxy detection, segmentation, representation learning, and future probabilistic 3D morpho-spectral reconstruction.
 
 ---
 
-## Vision
+# Vision
 
-Modern deep-field surveys such as CEERS contain thousands of distant galaxies spanning a wide range of morphologies and redshifts.
+Modern JWST surveys such as CEERS, JADES, PRIMER, and COSMOS-Web are revolutionizing observational astronomy by providing unprecedented views of the distant universe.
 
-Astro-Flow-3D aims to combine astronomical data processing, computer vision, and transformer architectures to learn physically meaningful representations of galaxy structure and evolution.
+Astro-Flow-3D combines astronomical data processing, computer vision, and deep learning to learn physically meaningful representations of galaxy morphology while maintaining a reproducible and scalable scientific workflow.
 
 ---
 
-## Current Phase
+# Current Status
 
-### Stage 1: Data Infrastructure and Preprocessing
+## Stage 1 — Data Engineering & Preprocessing (≈90% Complete)
 
 Current focus:
 
-* JWST CEERS observation discovery
-* FITS product retrieval
-* FITS inspection and validation
-* Astronomical image visualization
-* Data normalization and preprocessing
-* Dataset pipeline development
+- JWST data discovery
+- FITS inspection
+- Image preprocessing
+- Tile generation
+- Metadata extraction
+- Dataset engineering
+- Pipeline orchestration
 
 ---
 
-## Completed Milestones
+# Completed Milestones
 
-* [x] Docker-based development environment
-* [x] GPU-enabled PyTorch container
-* [x] GitHub Actions CI pipeline
-* [x] GitHub Container Registry integration
-* [x] CEERS observation discovery
-* [x] JWST FITS product retrieval
-* [x] FITS metadata inspection
-* [x] Scientific image visualization
+## Infrastructure
 
----
+- [x] Repository bootstrap
+- [x] Docker development environment
+- [x] GPU-enabled PyTorch container
+- [x] GitHub Actions CI/CD
+- [x] GitHub Container Registry (GHCR)
+- [x] Feature-branch workflow
 
-## Objectives
+## JWST Data Pipeline
 
-### Data Engineering
+- [x] CEERS observation discovery
+- [x] MAST query pipeline
+- [x] FITS product download
+- [x] FITS inspection
+- [x] FITS visualization
+- [x] Scientific image analysis
 
-* Download and inspect JWST CEERS observations
-* Build multi-band aligned tensors
-* Generate normalized image tiles
-* Create PyTorch dataset pipeline
+## Preprocessing Pipeline
 
-### Computer Vision
-
-* Train baseline U-Net segmentation models
-* Explore attention-based segmentation architectures
-* Evaluate Swin Transformer backbones
-* Investigate Mask2Former integration
-
-### Scientific Modeling
-
-* Learn galaxy morphology representations
-* Develop physics-aware auxiliary prediction heads
-* Explore probabilistic morpho-spectral reconstruction
-* Investigate 3D scene understanding from deep-field observations
+- [x] Percentile-based normalization
+- [x] Tile generation
+- [x] Tile metadata extraction
+- [x] Tile quality scoring
+- [x] Statistics generation
+- [x] CSV dataset indexing
+- [x] Modular preprocessing pipeline
+- [x] PyTorch Dataset abstraction
 
 ---
 
-## Repository Structure
+# Objectives
+
+## Data Engineering
+
+- Download JWST observations
+- Multi-band image alignment
+- Image preprocessing
+- Tile generation
+- Metadata generation
+- Dataset indexing
+- PyTorch dataset creation
+
+## Computer Vision
+
+- Baseline U-Net segmentation
+- Attention U-Net
+- Swin Transformer
+- SegFormer
+- Mask2Former
+
+## Scientific Modeling
+
+- Galaxy morphology learning
+- Multi-task learning
+- Physics-aware auxiliary heads
+- Probabilistic morpho-spectral reconstruction
+- 3D scene understanding
+
+---
+
+# Repository Structure
 
 ```text
 Astro-Flow-3D/
 
 ├── src/
 │   ├── data/
+│   │   ├── fits_loader.py
+│   │   ├── preprocess.py
+│   │   ├── tile_generator.py
+│   │   ├── statistics.py
+│   │   ├── pipeline.py
+│   │   └── jwst_dataset.py
+│   │
 │   ├── models/
 │   ├── training/
 │   └── utils/
 │
 ├── scripts/
-│   ├── check_environment.py
-│   ├── download_ceers.py
-│   ├── download_first_fits.py
-│   └── visualize_fits.py
+│   └── data/
+│       ├── check_environment.py
+│       ├── check_tiles.py
+│       ├── dataset_report.py
+│       ├── download_ceers.py
+│       ├── download_first_fits.py
+│       ├── inspect_fits.py
+│       ├── visualize_fits.py
+│       └── visualize_tile_grid.py
 │
 ├── configs/
-├── notebooks/
 ├── docker/
-│   └── Dockerfile
-│
+├── downloads/
+├── notebooks/
 ├── .github/
 │   └── workflows/
 │
@@ -99,84 +136,135 @@ Astro-Flow-3D/
 
 ---
 
-## Data Pipeline
+# Data Pipeline
 
 ```text
-JWST CEERS Observations
-            │
-            ▼
-      FITS Products
-            │
-            ▼
-      Image Inspection
-            │
-            ▼
-      Preprocessing
-            │
-            ▼
-       Image Tiles
-            │
-            ▼
-    PyTorch Dataset
-            │
-            ▼
-      Deep Learning
+JWST Observations
+        │
+        ▼
+MAST Discovery
+        │
+        ▼
+FITS Download
+        │
+        ▼
+FITS Inspection
+        │
+        ▼
+Normalization
+        │
+        ▼
+Tile Generation
+        │
+        ▼
+Statistics & Metadata
+        │
+        ▼
+Dataset Index
+        │
+        ▼
+PyTorch Dataset
+        │
+        ▼
+Deep Learning Models
 ```
 
 ---
 
-## Technology Stack
+# Technology Stack
 
-* Python
-* PyTorch
-* Astropy
-* Astroquery
-* NumPy
-* Matplotlib
-* Docker
-* GitHub Actions
-* GitHub Container Registry
+- Python
+- PyTorch
+- NumPy
+- Pandas
+- Astropy
+- Astroquery
+- Matplotlib
+- Docker
+- GitHub Actions
+- GitHub Container Registry
 
 ---
 
-## Roadmap
+# Roadmap
 
-### Phase 1 — Infrastructure
+## Stage 0 — Infrastructure ✅
 
-* [x] Project bootstrap
-* [x] Docker environment
-* [x] CI/CD setup
-* [x] CEERS access pipeline
-* [x] FITS visualization
+- [x] Project bootstrap
+- [x] Docker environment
+- [x] CI/CD pipeline
+- [x] GHCR integration
+- [x] Repository workflow
 
-### Phase 2 — Dataset Creation
+---
 
-* [ ] FITS preprocessing pipeline
-* [ ] Multi-band alignment
-* [ ] Tile generation
-* [ ] Dataset abstraction
-* [ ] Metadata indexing
+## Stage 1 — Data Engineering 🟢
 
-### Phase 3 — Baseline Models
+### Data Acquisition
 
-* [ ] U-Net segmentation
-* [ ] Attention U-Net
-* [ ] Training pipeline
-* [ ] Evaluation metrics
+- [x] CEERS discovery
+- [x] FITS retrieval
 
-### Phase 4 — Transformer Architectures
+### Data Inspection
 
-* [ ] Swin Transformer backbone
-* [ ] SegFormer experiments
-* [ ] Mask2Former integration
-* [ ] Multi-task learning
+- [x] FITS exploration
+- [x] Image visualization
 
-### Phase 5 — Astro-Flow-3D
+### Preprocessing
 
-* [ ] Physics-aware prediction heads
-* [ ] Morphological representation learning
-* [ ] Probabilistic reconstruction
-* [ ] 3D scene generation
+- [x] Image normalization
+- [x] Tile generation
+- [x] Statistics generation
+- [x] Metadata indexing
+- [x] PyTorch dataset
 
-```
-```
+### Remaining
+
+- [ ] Reconstruction validation
+- [ ] Configuration system
+- [ ] Batch preprocessing
+
+---
+
+## Stage 2 — Dataset Intelligence
+
+- [ ] Multi-band alignment
+- [ ] Multi-channel tensors
+- [ ] Dataset versioning
+- [ ] Data augmentation
+- [ ] Train / Validation / Test splits
+
+---
+
+## Stage 3 — Baseline Models
+
+- [ ] U-Net
+- [ ] Attention U-Net
+- [ ] Training pipeline
+- [ ] Evaluation metrics
+
+---
+
+## Stage 4 — Transformer Architectures
+
+- [ ] Swin Transformer
+- [ ] SegFormer
+- [ ] Mask2Former
+- [ ] Multi-task learning
+
+---
+
+## Stage 5 — Astro-Flow-3D
+
+- [ ] Physics-aware prediction heads
+- [ ] Morphology representation learning
+- [ ] Probabilistic reconstruction
+- [ ] 3D morpho-spectral scene generation
+
+---
+
+# Development Philosophy
+
+Astro-Flow-3D is designed as a modular research framework.
+
+Each stage of the pipeline—from FITS ingestion to dataset creation and model training—is implemented as reusable, independently testable components. This design enables reproducibility, scalability to large JWST surveys, and straightforward experimentation with future architectures.

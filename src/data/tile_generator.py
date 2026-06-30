@@ -1,103 +1,80 @@
-import numpy as np
-from astropy.io import fits
 from pathlib import Path
 
-INPUT_FITS = (
-    "downloads/mastDownload/JWST/"
-    "jw01345003001_08201_00002_nrca2/"
-    "jw01345003001_08201_00002_nrca2_i2d.fits"
-)
-
-TILE_SIZE = 256
+import numpy as np
 
 
-def normalize(image):
+def generate_tiles(
+    image: np.ndarray,
+    output_dir,
+    source_name: str,
+    tile_size: int = 256,
+    stride: int = 256,
+):
+    """
+    Generate normalized tiles from a JWST image.
 
-    image = np.nan_to_num(image)
+    Parameters
+    ----------
+    image : np.ndarray
+        Normalized 2D image.
 
-    p1 = np.percentile(image, 1)
-    p99 = np.percentile(image, 99.8)
+    output_dir : str | Path
 
-    image = np.clip(image, p1, p99)
+    source_name : str
+        FITS filename (without extension).
 
-    image = (
-        image - image.min()
-    ) / (
-        image.max() - image.min()
+    tile_size : int
+
+    stride : int
+
+    Returns
+    -------
+    int
+        Number of tiles generated.
+    """
+
+    output_dir = Path(output_dir)
+
+    output_dir.mkdir(
+        parents=True,
+        exist_ok=True,
     )
-
-    return image.astype(np.float32)
-
-
-def create_tiles(image, output_dir):
 
     count = 0
 
-    h, w = image.shape
+    height, width = image.shape
 
     for y in range(
         0,
-        h - TILE_SIZE + 1,
-        TILE_SIZE
+        height - tile_size + 1,
+        stride,
     ):
 
         for x in range(
             0,
-            w - TILE_SIZE + 1,
-            TILE_SIZE
+            width - tile_size + 1,
+            stride,
         ):
 
             tile = image[
-                y:y + TILE_SIZE,
-                x:x + TILE_SIZE
+                y:y + tile_size,
+                x:x + tile_size,
             ]
 
             filename = (
-                output_dir /
-                f"tile_{count:04d}.npy"
+                f"{source_name}"
+                f"_tile"
+                f"_x{x:05d}"
+                f"_y{y:05d}"
+                f"_s{tile_size}"
+                ".npy"
             )
 
-            np.save(filename, tile)
+            np.save(
+                output_dir / filename,
+                tile.astype(np.float32),
+            )
 
             count += 1
 
     return count
-
-
-def main():
-
-    output_dir = Path(
-        "/data/astroflow/processed/tiles"
-    )
-
-    output_dir.mkdir(
-        parents=True,
-        exist_ok=True
-    )
-
-    print(
-        f"Saving tiles to: {output_dir}"
-    )
-
-    image = fits.open(
-        INPUT_FITS
-    )["SCI"].data
-
-    print(
-        f"Loaded image: {image.shape}"
-    )
-
-    image = normalize(image)
-
-    total = create_tiles(
-        image,
-        output_dir
-    )
-
-    print(
-        f"Generated {total} tiles"
-    )
-
-
-if __name__ == "__main__":
-    main()
